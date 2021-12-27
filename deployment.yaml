@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: student-mark-service
+  name: student-mark-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-mark-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: student-mark-service
+    spec:
+      containers:
+      - image: apaspxp/student-mark-service:latest
+        name: student-mark-service
+        resources: {}
+status: {}
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: student-mark-service
+  name: student-mark-service
+spec:
+  ports:
+  - name: 8082-8082
+    port: 8082
+    protocol: TCP
+    targetPort: 8082
+  selector:
+    app: student-mark-service
+  type: ClusterIP
+status:
+  loadBalancer: {}
